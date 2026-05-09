@@ -32,6 +32,12 @@ async function Header() {
           <div className="space-x-6 font-medium text-gray-600 flex items-center ">
             {session ? (
               <>
+                <Link
+                  href="/orderHistory"
+                  className="hover:text-primary transition"
+                >
+                  Order History
+                </Link>
                 <LogoutButton />
                 <CartIcon />
               </>

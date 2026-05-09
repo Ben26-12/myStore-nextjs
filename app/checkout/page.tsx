@@ -10,14 +10,24 @@ export default function CheckoutPage() {
   const cartItems = useStore((state) => state.cartItems);
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
-
+  const [hasHydrated, setHasHydrated] = useState(false);
+  //effect check xem zustand đã đọc được storage chưa
   useEffect(() => {
-    if (cartItems.length === 0) {
-      router.replace("/");
-    } else {
-      setIsReady(true);
+    setHasHydrated(useStore.persist.hasHydrated());
+    useStore.persist.onFinishHydration(() => {
+      setHasHydrated(true);
+    });
+  });
+  //effect 2: chỉ khi đọc được storage rồi thì mới check items trong cart
+  useEffect(() => {
+    if (hasHydrated) {
+      if (cartItems.length === 0) {
+        router.replace("/");
+      } else {
+        setIsReady(true);
+      }
     }
-  }, [cartItems, router]);
+  }, [hasHydrated]);
 
   if (!isReady || cartItems.length === 0) {
     return (

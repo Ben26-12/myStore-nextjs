@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useStore } from "@/app/store/store";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 const checkoutSchema = z.object({
   fullName: z.string().min(2, "Full name is too short"),
@@ -41,23 +42,40 @@ export default function CheckoutForm() {
 
   const onSubmit = async (values: CheckoutValues) => {
     try {
+      const supabase = await createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) throw new Error("You must be logged in");
+      const totalAmount = cartItems.reduce(
+        (acc, item) => acc + item.price * (item.quantity ?? 0),
+        0,
+      );
       const orderData = {
-        ...values,
+        user_id: user.id,
+        full_name: values.fullName,
+        email: values.email,
+        phone: values.phone,
+        address: values.address,
+        city: values.city,
+        note: values.note,
         items: cartItems,
-        total: cartItems.reduce(
-          (acc, item) => acc + item.price * (item.quantity ?? 0),
-          0,
-        ),
+        total: totalAmount,
         status: "pending",
-        createdAt: new Date().toISOString(),
       };
-      //Logic goi API ở đây
-      console.log("Submitting order:", orderData);
+      const { data: newOrder, error } = await supabase
+        .from("orders")
+        .insert([orderData])
+        .select()
+        .single();
+
+      if (error) throw error;
 
       toast.success("Order placed successfully!");
       clearCart();
-      router.push("/thankyou");
+      router.push(`/thankyou?orderId=${newOrder.id}`);
     } catch (error) {
+      console.error("Order placement failed:", error);
       toast.error("Something went wrong. Please try again.");
     }
   };

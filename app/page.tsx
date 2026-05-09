@@ -29,7 +29,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center gap-6 md:flex-row w-full">
-                <div className="relative aspect-[7/10] w-full md:w-1/2">
+                <div className="relative aspect-7/10 w-full md:w-1/2">
                   <Image
                     src="https://themedevhub-images.netlify.app/components/images/about-2.webp"
                     alt="about 1"
@@ -39,7 +39,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex w-full flex-col items-center justify-center gap-6 md:w-1/2">
-                  <div className="relative aspect-[11/10] w-full">
+                  <div className="relative aspect-11/10 w-full">
                     <Image
                       src="https://themedevhub-images.netlify.app/components/images/about-2.webp"
                       alt="about 2"
@@ -48,7 +48,7 @@ export default function Home() {
                       className="rounded-lg object-cover"
                     />
                   </div>
-                  <div className="relative aspect-[7/10] w-full">
+                  <div className="relative aspect-7/10 w-full">
                     <Image
                       src="https://themedevhub-images.netlify.app/components/images/about-2.webp"
                       alt="about 3"
@@ -62,7 +62,7 @@ export default function Home() {
             </div>
             <div className="flex w-full flex-col items-center justify-center gap-12 pt-12 lg:w-1/2 lg:pt-48">
               <div className="flex flex-col items-center justify-center gap-6 md:flex-row w-full">
-                <div className="relative aspect-[9/10] w-full md:w-1/2">
+                <div className="relative aspect-9/10 w-full md:w-1/2">
                   <Image
                     src="https://themedevhub-images.netlify.app/components/images/about-2.webp"
                     alt="about 4"
@@ -72,7 +72,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex w-full flex-col items-center justify-center gap-6 md:w-1/2">
-                  <div className="relative aspect-[8/10] w-full">
+                  <div className="relative aspect-8/10 w-full">
                     <Image
                       src="https://themedevhub-images.netlify.app/components/images/about-2.webp"
                       alt="about 5"
@@ -82,7 +82,7 @@ export default function Home() {
                     />
                   </div>
 
-                  <div className="relative aspect-[9/10] w-full">
+                  <div className="relative aspect-9/10 w-full">
                     <Image
                       src="https://themedevhub-images.netlify.app/components/images/about-2.webp"
                       alt="about 6"
